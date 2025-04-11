@@ -91,7 +91,7 @@ def points_for_receipt(request, receipt_id):
     """
     # Check if the receipt ID exists in the store.
     if str(receipt_id) not in receipt_store:
-        return HttpResponseBadRequest("Receipt not found.")
+        return JsonResponse({"error": "No receipt found for that ID."}, status=404)
     
     # Calculate points based on the total amount.
     total = receipt_store[str(receipt_id)].count_points()
